@@ -1,10 +1,11 @@
 <template>
-  <div class="container">
+  <div class="container justify-content-center">
     <div class="row">
       <h1>User store</h1>
     </div>
-    <div class="row" v-for="user in users" :key="user.id">
-      <UserItem :user="user" />
+      <AddUserItem class="justify-content-center"/>
+    <div class="row justify-content-center" v-for="user in users" :key="user.id">
+      <UserItem class="justify-content-center row" :user="user" />
     </div>
   </div>
 </template>
@@ -15,10 +16,12 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 import axios from 'axios';
 import { mapGetters, mapActions } from 'vuex';
 import UserItem from './UserItem.vue';
+import AddUserItem from './AddUserItem.vue';
 @Component({
   computed: mapActions(['fetchUsers']),
   components: {
     UserItem,
+    AddUserItem,
   },
 })
 export default class Users extends Vue {

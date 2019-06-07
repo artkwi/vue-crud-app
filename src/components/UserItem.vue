@@ -1,5 +1,5 @@
 <template>
-    <div class="col-10 mt-2">
+    <div class="col-5 mt-2 justify-content-center">
         <div class="card bg-secondary">
           <img :src="user.image" alt="user picture" >
           <div class="card-body">
@@ -20,3 +20,11 @@ export default class UserItem extends Vue {
     @Prop() private user!: any;
 }
 </script>
+
+<style lang="scss" scoped>
+.card {
+    img {
+        height: 300px;
+    }
+}
+</style>
