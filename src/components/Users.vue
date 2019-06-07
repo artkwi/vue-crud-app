@@ -17,6 +17,7 @@ import axios from 'axios';
 import { mapGetters, mapActions } from 'vuex';
 import UserItem from './UserItem.vue';
 import AddUserItem from './AddUserItem.vue';
+import { IUser } from '../models/IUser';
 @Component({
   computed: mapActions(['fetchUsers']),
   components: {
@@ -25,15 +26,15 @@ import AddUserItem from './AddUserItem.vue';
   },
 })
 export default class Users extends Vue {
-  private users = [];
 
+  @Prop() private users!: [ IUser ];
 
-  public mounted() {
-    axios.get('http://localhost:3000/users')
-    .then( (response) =>
-    this.users = response.data )
-    .catch( (err) => console.log(err));
-  }
+  // public mounted() {
+  //   axios.get('http://localhost:3000/users')
+  //   .then( (response) =>
+  //   this.users = response.data )
+  //   .catch( (err) => console.log(err));
+  // }
 }
 </script>
 

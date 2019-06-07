@@ -1,18 +1,30 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <Users />
+    <Users :users="users" />
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { Component, Vue } from 'vue-property-decorator';
+import { getModule } from 'vuex-module-decorators';
 import Users from '@/components/Users.vue'; // @ is an alias to /src
+import UsersModule from '@/modules/users/index.ts';
+import { mapState } from 'vuex';
 
-export default Vue.extend({
-  name: 'home',
+const usersModule = getModule(UsersModule);
+
+@Component({
   components: {
     Users,
   },
-});
+  computed: mapState({
+    users: () => usersModule.users,
+  }),
+})
+export default class Home extends Vue {
+  public created() {
+    usersModule.fetchUsers();
+  }
+}
 </script>

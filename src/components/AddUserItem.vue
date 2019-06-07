@@ -18,7 +18,23 @@
 
 <script lang="ts">
 import { Component, Prop, Emit, Vue } from 'vue-property-decorator';
+import UsersModule from '@/modules/users/index.ts'; 
+import { getModule } from 'vuex-module-decorators';
+import { IUser } from '../models/IUser';
+const usersModule = getModule(UsersModule);
 
 @Component
-export default class AddUserItem extends Vue {}
+export default class AddUserItem extends Vue {
+    public newUser:IUser = {
+       
+            first_name: "Kenton",
+            last_name: "Shields",
+            email: "Kari_Ferry33@yahoo.com",
+            image: "http://lorempixel.com/640/480/technics"
+          }
+    created() {
+        usersModule.addUser(this.newUser);
+    };
+
+}
 </script>
