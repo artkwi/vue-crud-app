@@ -5,7 +5,11 @@
         <h1 class="h1">Users store</h1>
       </div>
     </nav>
-    <Users :users="users" @delete-user="deleteUser"/>
+    <Users
+     :users="users"
+     :activeUser="activeUser"
+      @delete-user="deleteUser"
+      @set-active-user="setActiveUser" />
   </div>
 </template>
 
@@ -23,7 +27,8 @@ const usersModule = getModule(UsersModule);
     Users
   },
   computed: mapState({
-    users: () => usersModule.users
+    users: () => usersModule.users,
+    activeUser: () => usersModule.getActiveUser,
   })
 })
 export default class Home extends Vue {
@@ -32,6 +37,9 @@ export default class Home extends Vue {
   }
   public deleteUser(userId: number) {
     usersModule.deleteUser(userId);
+  }
+  public setActiveUser(userId:number) {
+    usersModule.setActiveUser(userId);
   }
 }
 </script>

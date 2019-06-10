@@ -3,7 +3,12 @@
     
     <AddUserItem class="justify-content-center"/>
     <div class="row justify-content-center mt-4">
-        <UserItem v-for="user in users" :key="user.id" class="justify-content-center col-sm-12 col-md-6 col-lg-4" :user="user" @delete-user="deleteUser"/>
+        <UserItem v-for="user in users" :key="user.id"
+          class="justify-content-center col-sm-12 col-md-6 col-lg-4"
+          :user="user" 
+          :active-user="activeUser"
+          @delete-user="deleteUser"
+          @set-active-user="setActiveUser" />
     </div>
   </div>
 </template>
@@ -16,7 +21,6 @@ import UserItem from "./UserItem.vue";
 import AddUserItem from "./AddUserItem.vue";
 import { IUser } from "../models/IUser";
 @Component({
-  computed: mapActions(["fetchUsers"]),
   components: {
     UserItem,
     AddUserItem
@@ -24,10 +28,15 @@ import { IUser } from "../models/IUser";
 })
 export default class Users extends Vue {
   @Prop() private users!: [IUser];
+  @Prop() private activeUser!: IUser;
   @Emit()
   deleteUser(userId: number) {
     return userId;
   }
+  @Emit()
+  setActiveUser(userId: number) {
+    return userId;
+  } 
 }
 </script>
 
