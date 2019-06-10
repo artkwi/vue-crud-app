@@ -1,26 +1,30 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <Users :users="users" @delete-user="deleteUser" />
+    <nav class="navigation">
+      <div class="row justify-content-center">
+        <h1 class="h1">Users store</h1>
+      </div>
+    </nav>
+    <Users :users="users" @delete-user="deleteUser"/>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Emit } from 'vue-property-decorator';
-import { getModule } from 'vuex-module-decorators';
-import Users from '@/components/Users.vue'; // @ is an alias to /src
-import UsersModule from '@/modules/users/index.ts';
-import { mapState } from 'vuex';
+import { Component, Vue, Emit } from "vue-property-decorator";
+import { getModule } from "vuex-module-decorators";
+import Users from "@/components/Users.vue"; // @ is an alias to /src
+import UsersModule from "@/modules/users/index.ts";
+import { mapState } from "vuex";
 
 const usersModule = getModule(UsersModule);
 
 @Component({
   components: {
-    Users,
+    Users
   },
   computed: mapState({
-    users: () => usersModule.users,
-  }),
+    users: () => usersModule.users
+  })
 })
 export default class Home extends Vue {
   public created() {
@@ -29,6 +33,19 @@ export default class Home extends Vue {
   public deleteUser(userId: number) {
     usersModule.deleteUser(userId);
   }
-
 }
 </script>
+
+<style lang="scss" scoped>
+
+.navigation {
+  background: #d7e4ef;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+  min-height: 100px;
+  .h1 {
+    margin: auto;
+  }
+}
+</style>

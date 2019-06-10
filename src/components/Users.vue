@@ -1,35 +1,31 @@
 <template>
   <div class="container justify-content-center">
-    <div class="row">
-      <h1>User store</h1>
-    </div>
-      <AddUserItem class="justify-content-center"/>
-    <div class="row justify-content-center" v-for="user in users" :key="user.id">
-      <UserItem class="justify-content-center row" :user="user" @delete-user="deleteUser" />
+    
+    <AddUserItem class="justify-content-center"/>
+    <div class="row justify-content-center mt-4">
+        <UserItem v-for="user in users" :key="user.id" class="justify-content-center col-sm-12 col-md-6 col-lg-4" :user="user" @delete-user="deleteUser"/>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-
-import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
-import axios from 'axios';
-import { mapGetters, mapActions } from 'vuex';
-import UserItem from './UserItem.vue';
-import AddUserItem from './AddUserItem.vue';
-import { IUser } from '../models/IUser';
+import { Vue, Component, Prop, Emit } from "vue-property-decorator";
+import axios from "axios";
+import { mapGetters, mapActions } from "vuex";
+import UserItem from "./UserItem.vue";
+import AddUserItem from "./AddUserItem.vue";
+import { IUser } from "../models/IUser";
 @Component({
-  computed: mapActions(['fetchUsers']),
+  computed: mapActions(["fetchUsers"]),
   components: {
     UserItem,
-    AddUserItem,
-  },
+    AddUserItem
+  }
 })
 export default class Users extends Vue {
-
-  @Prop() private users!: [ IUser ];
+  @Prop() private users!: [IUser];
   @Emit()
-  deleteUser(userId:number) {
+  deleteUser(userId: number) {
     return userId;
   }
 }
