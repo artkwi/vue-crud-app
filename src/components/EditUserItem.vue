@@ -33,7 +33,7 @@
           >
         </div>
         <button type="submit" class="btn btn-primary btn-block">Apply</button>
-        <button @click="cancelEdit" class="btn btn-primary btn-block">Cancel</button>
+        <button @click.prevent="cancelEdit" class="btn btn-primary btn-block">Cancel</button>
       </form>
     </div>
   </div>
@@ -61,7 +61,9 @@ export default class AddUserItem extends Vue {
     usersModule.setActiveUser(null);
   }
 
-  cancelEdit() {}
+  cancelEdit() {
+    usersModule.setActiveUser(null);
+  }
 
   public created() {}
 }

@@ -12,10 +12,9 @@
         </div>
       </div>
     </div>
-    <EditUserItem 
-    v-if="isActive" 
-    class="edit-user-item"
-    :active-user="activeUser" />
+    <transition name="fade">
+      <EditUserItem v-if="isActive" class="edit-user-item" :active-user="activeUser"/>
+    </transition>
   </div>
 </template>
 
@@ -79,5 +78,12 @@ export default class UserItem extends Vue {
       margin: auto;
     }
   }
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

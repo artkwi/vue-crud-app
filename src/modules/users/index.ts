@@ -25,16 +25,9 @@ export default class UsersModule extends VuexModule {
 
     @Action({ commit: 'ADD_USER' })
     public async addUser(newUser: IUser) {
-        // const newUser = {
-        //     "first_name": "Kenton",
-        //     "last_name": "Shields",
-        //     "email": "Kari_Ferry33@yahoo.com",
-        //     "image": "http://lorempixel.com/640/480/technics"
-        //   }
         const response = await axios.post('http://localhost:3000/users',
             newUser,
         );
-        // console.log([newUser, ...this.users]);
         return [newUser, ...this.users];
     }
 
@@ -42,9 +35,7 @@ export default class UsersModule extends VuexModule {
     public async updateUser(newUser: IUser) {
         const response = await axios.patch(`http://localhost:3000/users/${newUser.id}`,
         newUser);
-        const newUsers = [newUser, ...this.allUsers.filter(user => user.id !== newUser.id)]
-        console.log(newUser);
-        
+        const newUsers = [newUser, ...this.allUsers.filter(user => user.id !== newUser.id)];
         return newUsers;
     }
 
@@ -101,9 +92,4 @@ export default class UsersModule extends VuexModule {
     public get getActiveUser() {
         return this.activeUser;
     }
-    // public get getUser() { 
-    //     return (userId:number) => {
-    //         this.users.find(user => user.id === userId)
-    //     }
-    // }
 }
