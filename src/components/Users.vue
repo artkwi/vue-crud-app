@@ -5,14 +5,14 @@
     </div>
       <AddUserItem class="justify-content-center"/>
     <div class="row justify-content-center" v-for="user in users" :key="user.id">
-      <UserItem class="justify-content-center row" :user="user" />
+      <UserItem class="justify-content-center row" :user="user" @delete-user="deleteUser" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
 import axios from 'axios';
 import { mapGetters, mapActions } from 'vuex';
 import UserItem from './UserItem.vue';
@@ -28,13 +28,10 @@ import { IUser } from '../models/IUser';
 export default class Users extends Vue {
 
   @Prop() private users!: [ IUser ];
-
-  // public mounted() {
-  //   axios.get('http://localhost:3000/users')
-  //   .then( (response) =>
-  //   this.users = response.data )
-  //   .catch( (err) => console.log(err));
-  // }
+  @Emit()
+  deleteUser(userId:number) {
+    return userId;
+  }
 }
 </script>
 

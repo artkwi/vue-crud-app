@@ -5,7 +5,9 @@
           <div class="card-body">
             <div class="card-title">{{`${user.first_name} ${user.last_name}` }}</div>
             <div class="card-body">
-              {{ `email: ${user.email}` }}
+             <span> {{ `email: ${user.email}` }}</span>
+             <button @click="deleteUser" >Remove user</button>
+              
             </div>
           </div>
         </div>
@@ -18,6 +20,11 @@ import { Component, Emit, Vue, Prop } from 'vue-property-decorator';
 @Component
 export default class UserItem extends Vue {
     @Prop() private user!: any;
+
+    @Emit()
+    deleteUser() {
+        return this.user.id;
+    }
 }
 </script>
 

@@ -5,3 +5,9 @@ export interface IUser {
     email?: string;
     image?: string;
 }
+
+export class User implements IUser {
+    first_name = '';
+    last_name = 'a';
+    email = 'ema';
+}
